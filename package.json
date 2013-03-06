@@ -1,0 +1,43 @@
+{
+	"name": "node-odp",
+	"description": "A node library that wraps the odp.net dll to provide bindings to oracle on windows",
+	"version": "0.1.14",
+	"homepage": "https://github.com/bomsy/node-odp",
+	"author": "Miller hare ltd <www.millerhare.com>",
+	"contributors": [
+		{
+			"name": "Hubert .B. Manilla",
+			"email": "hubert.manilla@millerhare.com"
+		}
+	],
+	"repository": {
+		"type" : "git",
+		"url" : "git://github.com/bomsy/node-odp.git"
+	},
+	"bugs": {
+		"url": "https://github.com/bomsy/node-odp/issues"
+	},
+	"licences": [
+		{
+			"type": "MIT",
+			"url": "https://github.com/bomsy/node-odp/blob/master/LICENCE-MIT"
+		}
+	],
+	"main" : "./libs/build/Release/odpnode.node",
+	"engines": {
+		"node": "*"
+	},
+	"dependencies": {
+		"bindings" : "1.0.x",
+		"node-gyp": "0.8.5"
+	},
+	"keywords" : [
+		"odp.net",
+		"oracle",
+		"database",
+		"data",
+		"oracle data provider",
+		".net",
+		"db"
+	]
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="..">
+      <UniqueIdentifier>{739DB09A-CC57-A953-A6CF-F64FA08E4FA7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="..\src">
+      <UniqueIdentifier>{8CDEE807-BC53-E450-C8B8-4DEBB66742D4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="..\src\helpers">
+      <UniqueIdentifier>{7EE98CE8-2345-EC4F-120C-CFF181657498}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\odpnode.cc">
+      <Filter>..</Filter>
+    </ClCompile>
+    <None Include="..\binding.gyp">
+      <Filter>..</Filter>
+    </None>
+    <ClCompile Include="..\src\odpconnection.cc">
+      <Filter>..\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\odpdata.cc">
+      <Filter>..\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\odpcommand.cc">
+      <Filter>..\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\helpers\helpers.cc">
+      <Filter>..\src\helpers</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
