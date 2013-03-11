@@ -3,7 +3,8 @@
 A node library that wraps the odp.net dll to provide bindings to oracle on windows.
 
 ## Requirements
- Install [ODAC]:http://www.oracle.com/technetwork/database/windows/downloads/index-101290.html, making sure the dlls are shared (registered in the GAC).
+ Install [ODAC]: http://www.oracle.com/technetwork/database/windows/downloads/index-101290.html, making sure the policy dlls are shared (placed in the GAC). See installation instructions [here]: http://www.oracle.com/technetwork/topics/dotnet/install112012-164342.html
+
  Install Microsoft visual C++ 2010 sp1 redistributable package.
 
 ## Installation
@@ -56,11 +57,43 @@ A node library that wraps the odp.net dll to provide bindings to oracle on windo
 	    }	
     });
 
-## API definition
+## API Definition
 
 ### OracleConnection
 
+    OracleConnection(connectionString);
+
+The constructor takes one parameter and returns a connection object. The connection string is any valid Oracle connection string.
+
 ### OracleCommand
+
+    OracleCommand(commandString, commandType, commandParameters, connectionObject);
+
+##### COMMANDSTRING
+
+This can either be a select statement or a function as shown  in the sample code above. This is a required parameter.
+
+##### COMMANDTYPE
+
+This an object of the OracleCommand.commandType enumeration object. This is a required parameter.
+
+##### COMMANDPARAMETERS
+
+This an array of parameter objects as shown above. Each parameter object is defined as 
+
+    {
+    	name: parameterName,
+    	type: dataTypeObject,
+    	size: size(optional),
+    	value: parameterContent,
+    	direction: parameterDirectionObject
+    }
+
+This parameter is optional.
+
+##### CONNECTIONOBJECT
+
+This is a connection object created by OracleConnection. This is a required parameter.
 
 #### .executeReader
 
