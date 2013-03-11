@@ -1,7 +1,7 @@
 {
 	"name": "node-odp",
 	"description": "A node library that wraps the odp.net dll to provide bindings to oracle on windows.",
-	"version": "0.1.18",
+	"version": "0.1.19",
 	"homepage": "https://github.com/bomsy/node-odp",
 	"author": "Miller hare ltd <www.millerhare.com>",
 	"contributors": [
