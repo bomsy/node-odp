@@ -3,9 +3,12 @@
 A node library that wraps the odp.net dll to provide bindings to oracle on windows.
 
 ## Requirements
+ Install [ODAC]:http://www.oracle.com/technetwork/database/windows/downloads/index-101290.html, making sure the dlls are shared (registered in the GAC).
+ Install Microsoft visual C++ 2010 sp1 redistributable package.
 
-## Getting Started
+## Installation
 
+    npm install node-odp
 
 ## How to use (Sample code)
 
@@ -32,7 +35,7 @@ A node library that wraps the odp.net dll to provide bindings to oracle on windo
 	    }	
     ]
 
-    //Simple Select statement
+    //Simple select statement
     var cmdSelStatment = new odpnode.OracleCommand("SELECT m.FOLDERID,m.ZONE.ZONECODE FROM MID.MIFOLDER2 m,MID.MIVERSION s WHERE m.VERSION.VERSIONID = s.VERSIONID AND  m.ZONE.ZONECODE ='chwhrf-bldg'", commandType.TEXT, con);
     cmdSelStatement.executeReader(function(err, rows){
 	    if(err){
@@ -43,7 +46,7 @@ A node library that wraps the odp.net dll to provide bindings to oracle on windo
 	    }	
     });
 
-    //An oracle function with parameters
+    //Oracle function with parameters
     var cmdProc = new odpnode.OracleCommand("BEGIN :vResult := MID.MI_MAXSCRIPT.MITest( :pFOLDERID ); END;", cmdType.TEXT, parameters, con);
     cmdProc.executeNonQuery(function(err, rowsAffected, params){
 	    if(err){
@@ -98,6 +101,8 @@ v 0.1.14 - fixed exception handling in odpconnection.cc
 v 0.1.15 - changed dependency path in and PLATFORM to win32 binding.gyp 
 
 v 0.1.18 - updated readme
+
+v 0.1.19 - deps on node-gyp, bindings not needed. updated readme, remove dlls not needed, added 32 bit support
 
 ## Licence
 

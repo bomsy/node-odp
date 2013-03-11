@@ -40,7 +40,7 @@
     <ClCompile>
       <AdditionalIncludeDirectories>C:\Users\hubert.manilla\.node-gyp\0.8.21\src;C:\Users\hubert.manilla\.node-gyp\0.8.21\deps\uv\include;C:\Users\hubert.manilla\.node-gyp\0.8.21\deps\v8\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/clr %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalUsingDirectories>../dependencies</AdditionalUsingDirectories>
+      <AdditionalUsingDirectories>../dependencies/64;../dependencies/32</AdditionalUsingDirectories>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -76,7 +76,7 @@
     <ClCompile>
       <AdditionalIncludeDirectories>C:\Users\hubert.manilla\.node-gyp\0.8.21\src;C:\Users\hubert.manilla\.node-gyp\0.8.21\deps\uv\include;C:\Users\hubert.manilla\.node-gyp\0.8.21\deps\v8\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/clr /MP %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalUsingDirectories>../dependencies</AdditionalUsingDirectories>
+      <AdditionalUsingDirectories>../dependencies/64;../dependencies/32</AdditionalUsingDirectories>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <DisableSpecificWarnings>4251;%(DisableSpecificWarnings)</DisableSpecificWarnings>

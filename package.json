@@ -27,10 +27,6 @@
 	"engines": {
 		"node": "*"
 	},
-	"dependencies": {
-		"bindings" : "1.0.x",
-		"node-gyp": "0.8.5"
-	},
 	"keywords" : [
 		"odp.net",
 		"oracle",

@@ -30,7 +30,10 @@
 								'VCCLCompilerTool': {
 									'RuntimeLibrary': '3',
 									'RuntimeTypeInfo': 'true',
-									'AdditionalUsingDirectories': '../dependencies',
+									'AdditionalUsingDirectories': [
+										'../dependencies/64',
+										'../dependencies/32'
+									],
 								},
 							},
 						},
@@ -39,7 +42,10 @@
 								'VCCLCompilerTool': {
 									'RuntimeLibrary': '3',
 									'RuntimeTypeInfo': 'true',
-									'AdditionalUsingDirectories': '../dependencies',
+									'AdditionalUsingDirectories': [
+										'../dependencies/64',
+										'../dependencies/32'
+									],
 								},
 								'VCLinkerTool': {
 									'AdditionalLibraryDirectories': [
