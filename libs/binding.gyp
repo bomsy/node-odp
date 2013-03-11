@@ -1,7 +1,4 @@
 {
-	'variables':{
-		'target_arch' : 'x64',
-	},
 	'targets': [
 		{
 			'target_name': 'odpnode',
@@ -15,7 +12,7 @@
 			'conditions' : [
 				['OS=="win"', {
 					'defines': [
-						'PLATFORM="win64"'
+						'PLATFORM="win32"'
 					],
 					'cflags': [
 						'/clr',
@@ -33,7 +30,7 @@
 								'VCCLCompilerTool': {
 									'RuntimeLibrary': '3',
 									'RuntimeTypeInfo': 'true',
-									'AdditionalUsingDirectories': '..//dependencies',
+									'AdditionalUsingDirectories': '../dependencies',
 								},
 							},
 						},
@@ -42,8 +39,13 @@
 								'VCCLCompilerTool': {
 									'RuntimeLibrary': '3',
 									'RuntimeTypeInfo': 'true',
-									'AdditionalUsingDirectories': '..//dependencies',
+									'AdditionalUsingDirectories': '../dependencies',
 								},
+								'VCLinkerTool': {
+									'AdditionalLibraryDirectories': [
+										'../dependencies'
+									]
+								}
 							},
 						},
 					},	

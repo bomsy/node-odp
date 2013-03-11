@@ -6,7 +6,7 @@
 #include "odpconnection.h"
 #include "helpers/helpers.h"
 
-//dnamically linked libraries
+//dynamically linked libraries
 #using <System.dll>
 #using <System.Data.dll>
 #using <Oracle.DataAccess.dll>
@@ -65,19 +65,22 @@ Handle<Value> OdpConnection::Open(const Arguments& args){
 	try{
 		o->connection->Open();
 		cout << "Connection Open" << endl;
-		return scope.Close(Undefined());
 	}catch(OracleException ^e){
 		ThrowException(v8::Exception::Error(Helpers::String::ToV8String(e->Message)));
-		return scope.Close(Undefined());
 	}
+	return scope.Close(Undefined());
 }
 
 Handle<Value> OdpConnection::Close(const Arguments& args){
 	HandleScope scope;
 	//unwrap to access the object
 	OdpConnection* o = ObjectWrap::Unwrap<OdpConnection>(args.This());
-	o->connection->Close();
-	cout << "Connection Closed" << endl;
+	try{
+		o->connection->Close();
+		cout << "Connection Closed" << endl;
+	}catch(System::Exception ^e){
+		ThrowException(v8::Exception::Error(Helpers::String::ToV8String(e->Message)));
+	}
 	return scope.Close(Undefined());
 }
 
