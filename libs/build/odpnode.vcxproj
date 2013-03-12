@@ -38,7 +38,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\hubert.manilla\.node-gyp\0.8.21\src;C:\Users\hubert.manilla\.node-gyp\0.8.21\deps\uv\include;C:\Users\hubert.manilla\.node-gyp\0.8.21\deps\v8\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\hubert.manilla\.node-gyp\0.10.0\src;C:\Users\hubert.manilla\.node-gyp\0.10.0\deps\uv\include;C:\Users\hubert.manilla\.node-gyp\0.10.0\deps\v8\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/clr %(AdditionalOptions)</AdditionalOptions>
       <AdditionalUsingDirectories>../dependencies/64;../dependencies/32</AdditionalUsingDirectories>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -58,7 +58,7 @@
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>C:\Users\hubert.manilla\.node-gyp\0.8.21\$(Configuration)\node.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>C:\Users\hubert.manilla\.node-gyp\0.10.0\$(Configuration)\node.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AllowIsolation>true</AllowIsolation>
       <DataExecutionPrevention>true</DataExecutionPrevention>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -68,13 +68,13 @@
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>C:\Users\hubert.manilla\.node-gyp\0.8.21\src;C:\Users\hubert.manilla\.node-gyp\0.8.21\deps\uv\include;C:\Users\hubert.manilla\.node-gyp\0.8.21\deps\v8\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\hubert.manilla\.node-gyp\0.10.0\src;C:\Users\hubert.manilla\.node-gyp\0.10.0\deps\uv\include;C:\Users\hubert.manilla\.node-gyp\0.10.0\deps\v8\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;BUILDING_V8_SHARED=1;BUILDING_UV_SHARED=1;PLATFORM=&quot;win32&quot;;BUILDING_NODE_EXTENSION;DEBUG;_DEBUG;%(PreprocessorDefinitions);%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\hubert.manilla\.node-gyp\0.8.21\src;C:\Users\hubert.manilla\.node-gyp\0.8.21\deps\uv\include;C:\Users\hubert.manilla\.node-gyp\0.8.21\deps\v8\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\hubert.manilla\.node-gyp\0.10.0\src;C:\Users\hubert.manilla\.node-gyp\0.10.0\deps\uv\include;C:\Users\hubert.manilla\.node-gyp\0.10.0\deps\v8\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/clr /MP %(AdditionalOptions)</AdditionalOptions>
       <AdditionalUsingDirectories>../dependencies/64;../dependencies/32</AdditionalUsingDirectories>
       <BufferSecurityCheck>true</BufferSecurityCheck>
@@ -100,7 +100,7 @@
       <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
     </Lib>
     <Link>
-      <AdditionalDependencies>C:\Users\hubert.manilla\.node-gyp\0.8.21\$(Configuration)\node.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>C:\Users\hubert.manilla\.node-gyp\0.10.0\$(Configuration)\node.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>../dependencies;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AllowIsolation>true</AllowIsolation>
       <DataExecutionPrevention>true</DataExecutionPrevention>
@@ -114,7 +114,7 @@
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>C:\Users\hubert.manilla\.node-gyp\0.8.21\src;C:\Users\hubert.manilla\.node-gyp\0.8.21\deps\uv\include;C:\Users\hubert.manilla\.node-gyp\0.8.21\deps\v8\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\hubert.manilla\.node-gyp\0.10.0\src;C:\Users\hubert.manilla\.node-gyp\0.10.0\deps\uv\include;C:\Users\hubert.manilla\.node-gyp\0.10.0\deps\v8\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;BUILDING_V8_SHARED=1;BUILDING_UV_SHARED=1;PLATFORM=&quot;win32&quot;;BUILDING_NODE_EXTENSION;%(PreprocessorDefinitions);%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
   </ItemDefinitionGroup>

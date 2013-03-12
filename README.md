@@ -3,9 +3,11 @@
 A node library that wraps the odp.net dll to provide bindings to oracle on windows.
 
 ## Requirements
- Install [ODAC]: http://www.oracle.com/technetwork/database/windows/downloads/index-101290.html, making sure the policy dlls are shared (placed in the GAC). See installation instructions [here]: http://www.oracle.com/technetwork/topics/dotnet/install112012-164342.html
+ Install [ODAC](http://www.oracle.com/technetwork/database/windows/downloads/index-101290.html), making sure the policy dlls are shared (placed in the GAC). See installation instructions [here](http://www.oracle.com/technetwork/topics/dotnet/install112012-164342.html)
 
  Install Microsoft visual C++ 2010 sp1 redistributable package.
+
+ Update: Install [Node v0.10.x](http://nodejs.org/)
 
 ## Installation
 
@@ -57,6 +59,7 @@ A node library that wraps the odp.net dll to provide bindings to oracle on windo
 	    }	
     });
 
+
 ## API Definition
 
 ### OracleConnection
@@ -69,15 +72,15 @@ The constructor takes one parameter and returns a connection object. The connect
 
     OracleCommand(commandString, commandType, commandParameters, connectionObject);
 
-##### COMMANDSTRING
+##### commandString
 
 This can either be a select statement or a function as shown  in the sample code above. This is a required parameter.
 
-##### COMMANDTYPE
+##### commandType
 
 This an object of the OracleCommand.commandType enumeration object. This is a required parameter.
 
-##### COMMANDPARAMETERS
+##### commandParameters
 
 This an array of parameter objects as shown above. Each parameter object is defined as 
 
@@ -91,17 +94,42 @@ This an array of parameter objects as shown above. Each parameter object is defi
 
 This parameter is optional.
 
-##### CONNECTIONOBJECT
+##### connectionObject
 
 This is a connection object created by OracleConnection. This is a required parameter.
 
+
 #### .executeReader
 
+    executeReader(function(err, rows){
+
+    })
+
+This function takes a callback and passes the err and rows objects to that callback.
+
+The err object holds the error if there is any and undefined if there is none. 
+
+The rows holds the JSON object of the rows returned. These rows are identified by their row numbers and column names as shown in the sample code above.
+
+
 #### .executeNonQuery
+    executeNonQuery(function(err, rowsAffected, parameters){
+
+    })
+
+This function takes a callback and passes the err, rowsAffected and parameters objects to the callback.
+
+The err object holds the error if there is any and undefined if there is none. 
+
+The rowsAffected returns the number of rows Affected by current execution, but returns -1 if there is none.
+
+The parameters object returns all the parameters attached to the command, allowing for access to any out or in/out parameter data.
 
 #### .executeScalar
 
 #### .commandType
+
+
 
 ### OracleData
 
@@ -136,6 +164,8 @@ v 0.1.15 - changed dependency path in and PLATFORM to win32 binding.gyp
 v 0.1.18 - updated readme
 
 v 0.1.19 - deps on node-gyp, bindings not needed. updated readme, remove dlls not needed, added 32 bit support
+
+v 0.2.0 - updated to support node v 0.10.0, might not be backward compatible
 
 ## Licence
 
