@@ -1,7 +1,7 @@
 {
 	"name": "node-odp",
-	"description": "A node library that wraps the odp.net dll to provide bindings to oracle on windows.",
-	"version": "0.2.0",
+	"description": "A node library that wraps the Oracle Data Provider for.NET (ODP.NET) library to provide bindings to oracle on windows.",
+	"version": "0.2.2",
 	"homepage": "https://github.com/bomsy/node-odp",
 	"author": "Miller hare ltd <www.millerhare.com>",
 	"contributors": [
@@ -25,7 +25,8 @@
 	],
 	"main" : "./libs/build/Release/odpnode.node",
 	"engines": {
-		"node": "0.10.x"
+		"node": "0.10.x",
+		"nodeunit": "0.7.x"
 	},
 	"keywords" : [
 		"odp.net",

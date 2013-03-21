@@ -1,4 +1,7 @@
 {
+	'target_defaults': {
+		'default_configuration': 'Release'
+	},
 	'targets': [
 		{
 			'target_name': 'odpnode',
@@ -40,7 +43,7 @@
 						'Release': {
 							'msvs_settings': {
 								'VCCLCompilerTool': {
-									'RuntimeLibrary': '3',
+									'RuntimeLibrary': '2',
 									'RuntimeTypeInfo': 'true',
 									'AdditionalUsingDirectories': [
 										'../dependencies/64',
