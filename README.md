@@ -17,7 +17,7 @@ A node library that wraps the Oracle Data Provider for.NET (ODP.NET) library to 
 
     npm install node-odp
 
-## How to use (Sample code)(Edit to fit your scenario)
+## How to use (Sample code) ***edit to fit your scenario***
 
     var odpnode = require('node-odp');
     var con = new odpnode.OracleConnection("Data Source=mhladmin;User Id=/;");
