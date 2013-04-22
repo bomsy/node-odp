@@ -225,6 +225,8 @@ v 0.2.0 - updated to support node v 0.10.0, might not be backward compatible
 v 0.2.1 - changed Runtime Library for Release Mode to 'MultiThreadedDLL'. This was causing it not to run on release machines. Now fixed! Unit tests added.
 
 v 0.2.2 - Readme.md fixes
+
+v 0.2.3 - Readme.md corrections
 ## Licence
 
 Copyright (c) 2013 Hubert Boma Manilla  
