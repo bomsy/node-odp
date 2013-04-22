@@ -26,7 +26,7 @@ A node library that wraps the Oracle Data Provider for.NET (ODP.NET) library to 
     var datatypes = odpnode.OracleData.dbType;
     var cmdType = odpnode.OracleCommand.commandType;
     
-    con.Open();
+    con.open();
     var parameters = [
 	    {
 		    name: "vResult",
@@ -72,6 +72,10 @@ A node library that wraps the Oracle Data Provider for.NET (ODP.NET) library to 
     OracleConnection(connectionString);
 
 The constructor takes one parameter and returns a connection object. The connection string is any valid Oracle connection string. For oracle connectionstring formats see [here](http://www.connectionstrings.com/oracle)
+
+#### .open
+
+The open method opens the connection
 
 ### OracleCommand
 
