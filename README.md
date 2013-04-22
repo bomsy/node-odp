@@ -67,7 +67,7 @@ A node library that wraps the Oracle Data Provider for.NET (ODP.NET) library to 
 
 ## API Definition
 
-### OracleConnection
+### ORACLECONNECTION
 
     OracleConnection(connectionString);
 
@@ -77,7 +77,7 @@ The constructor takes the connectionString as parameter and returns a new connec
 
 The open method opens the connection
 
-### OracleCommand
+### ORACLECOMMAND
 
     OracleCommand(commandString, commandType, commandParameters, connectionObject);
     
@@ -152,7 +152,7 @@ Oracle Command Constants for defining data text type
 
 returns constants defining the type of the command.
 
-### OracleData
+### ORACLEDATA
 
 A data object storing key/value pairs of constants representing various oracle types
 
