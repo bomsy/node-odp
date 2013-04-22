@@ -25,7 +25,8 @@ A node library that wraps the Oracle Data Provider for.NET (ODP.NET) library to 
     var parameterDirection = odpnode.OracleData.parameterDirection;
     var datatypes = odpnode.OracleData.dbType;
     var cmdType = odpnode.OracleCommand.commandType;
-
+    
+    con.Open();
     var parameters = [
 	    {
 		    name: "vResult",
@@ -43,7 +44,7 @@ A node library that wraps the Oracle Data Provider for.NET (ODP.NET) library to 
     ]
 
     //Simple select statement
-    var cmdSelStatment = new odpnode.OracleCommand("SELECT m.FOLDERID,m.ZONE.ZONECODE FROM MID.MIFOLDER2 m,MID.MIVERSION s WHERE m.VERSION.VERSIONID = s.VERSIONID AND  m.ZONE.ZONECODE ='chwhrf-bldg'", cmdType.TEXT, con);
+    var cmdSelStatement = new odpnode.OracleCommand("SELECT m.FOLDERID,m.ZONE.ZONECODE FROM MID.MIFOLDER2 m,MID.MIVERSION s WHERE m.VERSION.VERSIONID = s.VERSIONID AND  m.ZONE.ZONECODE ='chwhrf-bldg'", cmdType.TEXT, con);
     cmdSelStatement.executeReader(function(err, rows){
 	    if(err){
 		    console.log(err);
