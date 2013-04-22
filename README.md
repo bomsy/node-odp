@@ -71,7 +71,7 @@ A node library that wraps the Oracle Data Provider for.NET (ODP.NET) library to 
 
     OracleConnection(connectionString);
 
-The constructor takes one parameter and returns a connection object. The connection string is any valid Oracle connection string. For oracle connectionstring formats see [here](http://www.connectionstrings.com/oracle)
+The constructor takes the connectionString as parameter and returns a new connection object. The connection string is any valid Oracle connection string. For oracle connectionstring formats see [here](http://www.connectionstrings.com/oracle)
 
 #### .open
 
@@ -80,10 +80,12 @@ The open method opens the connection
 ### OracleCommand
 
     OracleCommand(commandString, commandType, commandParameters, connectionObject);
+    
+The constructor takes in parameters and returns a new command object
 
 ##### commandString
 
-This can either be a select statement or a function as shown  in the sample code above. This is a required parameter.
+This can either be a select statement or an oracle function call as shown  in the sample code above. This is a required parameter.
 
 ##### commandType
 
