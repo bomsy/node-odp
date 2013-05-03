@@ -185,30 +185,38 @@ void OdpCommand::AddParameters(Handle<v8::Array> parameters, Oracle::DataAccess:
 
 Handle<v8::Value> OdpCommand::ToJSON(Oracle::DataAccess::Client::OracleDataReader^ reader){
 	HandleScope scope;
-	Handle<v8::String> rows = v8::String::New("[");
+	Handle<v8::String> rowset = v8::String::New("[");
+	Handle<v8::String> rows;
 	int fc = 0; //fields count
 	int rc = 0; //records count
 	System::String^ items;
-	//loop through the rows
-	while(reader->Read()){
-		//loop through the columns
-		rows = v8::String::Concat(rows, v8::String::New("{"));
-		while(fc < reader->FieldCount){
-			items = "\"" + Helpers::String::Replace(reader->GetName(fc),".","_") + "\":\"" + reader[fc] + "\"";
-			if(fc != reader->FieldCount - 1){
-				items = items + ",";
+	//loop through the resultset , used for RefCursors	
+	do{
+		rows = v8::String::Concat(rows, v8::String::New("["));
+		//loop through the rows
+		while(reader->Read()){
+			//loop through the columns
+			rows = v8::String::Concat(rows, v8::String::New("{"));
+			while(fc < reader->FieldCount){
+				items = "\"" + Helpers::String::Replace(reader->GetName(fc),".","_") + "\":\"" + reader[fc] + "\"";
+				if(fc != reader->FieldCount - 1){
+					items = items + ",";
+				}
+				rows = v8::String::Concat(rows, Helpers::String::ToV8String(items));
+				fc++;
 			}
-			rows = v8::String::Concat(rows, Helpers::String::ToV8String(items));
-			fc++;
+			fc = 0;
+			rows = v8::String::Concat(rows, v8::String::New("},"));
+			rc++;	
 		}
-		fc = 0;
-		rows = v8::String::Concat(rows, v8::String::New("},"));
-		rc++;	
-	}
-	//remove the comma fronm the last JSON item
-	rows = Helpers::String::SnipEnd(rows); 
-	rows = v8::String::Concat(rows, v8::String::New("]"));
-	return scope.Close(Helpers::Json::ParseJson(rows));
+		//remove the comma fronm the last JSON item
+		rows = Helpers::String::SnipEnd(rows); 
+		rows = v8::String::Concat(rows, v8::String::New("],"));
+	}while (reader->NextResult())
+	rows = Helpers::String::SnipEnd(rows);
+	rowset = v8::String::Concat(rowset, rows);
+	rowset = v8::String::Concat(rowset, v8::String:New("]"));
+	return scope.Close(Helpers::Json::ParseJson(rowset));
 }
 
 //Builds and returns a javascript object rather than parsing to json
