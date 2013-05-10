@@ -70,12 +70,12 @@ cmd.executeNonQuery(function(err, rowsAffected, parameters){
 });
 console.log("---- Execute Reader ------");
 var cmd1 = new odpnode.OracleCommand("SELECT m.FOLDERID,m.ZONE.ZONECODE FROM MID.MIFOLDER2 m,MID.MIVERSION s WHERE m.VERSION.VERSIONID = s.VERSIONID AND  m.ZONE.ZONECODE ='chwhrf-bldg'", commandType.TEXT, con);
-cmd1.executeReader(function(err, rows){
+cmd1.executeReader(function(err, rowset){
 	if(err){
 		console.log(err);
 	}else{
-		console.log(rows);
-		console.log(rows[1]["ZONE_ZONECODE"]);
+		console.log(rowset);
+		//console.log(rowset[0]["ZONE_ZONECODE"]);
 	}	
 });
 console.log("---- Execute Non-Query (Functions) ------");

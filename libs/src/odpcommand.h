@@ -22,6 +22,7 @@ class OdpCommand : public node::ObjectWrap {
 
 		static v8::Handle<v8::Value> ToJSON(Oracle::DataAccess::Client::OracleDataReader^ reader);
 		static v8::Handle<v8::Value> ToJSON(Oracle::DataAccess::Client::OracleParameterCollection^ parameters);
+		static v8::Handle<v8::String> LoopReader(Oracle::DataAccess::Client::OracleDataReader^ reader);
 
 		static void AddParameters(v8::Handle<v8::Array> parameters, Oracle::DataAccess::Client::OracleCommand^ &command);
 		gcroot<Oracle::DataAccess::Client::OracleCommand^> command;

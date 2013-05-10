@@ -24,6 +24,8 @@ OdpCommand::~OdpCommand(){}; //destructor
 	//Command Types (System::Data::CommandType)
 	const int CMDTYPETEXT 	= 1;
 	const int CMDTYPESTDPROC 	= 4;
+	bool refcur = false;
+	const int REFCURNO = 121;
 
 void OdpCommand::Init(Handle<v8::Object> target){
 	Local<FunctionTemplate> tpl = FunctionTemplate::New(New);
@@ -165,18 +167,21 @@ void OdpCommand::AddParameters(Handle<v8::Array> parameters, Oracle::DataAccess:
 			}else if(value->IsNumber()){
 				objValue = static_cast<System::Int32>(value->Uint32Value());
 			}else {}
-
-			try{
+			//check if parameter is refcursor
+			if(type->Uint32Value() == REFCURNO){
+				refcur = true;
+			}
+			try {
 				if(size->IsUndefined() && value->IsUndefined()){
 					command->Parameters->Add(strName, static_cast<OracleDbType>(type->Uint32Value()), static_cast<ParameterDirection>(direction->Uint32Value()));
-				}else if (!size->IsUndefined() && value->IsUndefined()){
+				} else if (!size->IsUndefined() && value->IsUndefined()){
 					command->Parameters->Add(strName, static_cast<OracleDbType>(type->Uint32Value()), static_cast<System::Int32>(size->Uint32Value()), static_cast<ParameterDirection>(direction->Uint32Value()));
-				}else if(!size->IsUndefined() && !value->IsUndefined()){
+				} else if(!size->IsUndefined() && !value->IsUndefined()){
 					command->Parameters->Add(strName, static_cast<OracleDbType>(type->Uint32Value()), static_cast<System::Int32>(size->Uint32Value()), objValue, static_cast<ParameterDirection>(direction->Uint32Value()));
-				}else if(size->IsUndefined() && !value->IsUndefined()){
+				} else if(size->IsUndefined() && !value->IsUndefined()){
 					command->Parameters->Add(strName, static_cast<OracleDbType>(type->Uint32Value()), objValue, static_cast<ParameterDirection>(direction->Uint32Value()));
-				}else{}
-			}catch(ArgumentException^ e){
+				} else {}
+			} catch(ArgumentException^ e){
 				ThrowException(v8::Exception::TypeError(Helpers::String::ToV8String(e->Message)));
 			}
 		}
@@ -187,36 +192,48 @@ Handle<v8::Value> OdpCommand::ToJSON(Oracle::DataAccess::Client::OracleDataReade
 	HandleScope scope;
 	Handle<v8::String> rowset = v8::String::New("[");
 	Handle<v8::String> rows;
+	//loop through the resultset , used for RefCursors
+	if(refcur){	
+		do {
+			rows = LoopReader(reader);
+			rowset = v8::String::Concat(rowset, rows);
+		} while (reader->NextResult());
+		rowset = Helpers::String::SnipEnd(rowset);
+		rowset = v8::String::Concat(rowset, v8::String::New("]"));
+	} else {
+		//if no ref cursors
+		rows = LoopReader(reader);
+		rowset = Helpers::String::SnipEnd(rows);
+	}	
+	return scope.Close(Helpers::Json::ParseJson(rowset));
+}
+
+Handle<v8::String> OdpCommand::LoopReader(Oracle::DataAccess::Client::OracleDataReader^ reader){	
+	HandleScope scope;
 	int fc = 0; //fields count
 	int rc = 0; //records count
 	System::String^ items;
-	//loop through the resultset , used for RefCursors	
-	do{
-		rows = v8::String::Concat(rows, v8::String::New("["));
-		//loop through the rows
-		while(reader->Read()){
-			//loop through the columns
-			rows = v8::String::Concat(rows, v8::String::New("{"));
-			while(fc < reader->FieldCount){
-				items = "\"" + Helpers::String::Replace(reader->GetName(fc),".","_") + "\":\"" + reader[fc] + "\"";
-				if(fc != reader->FieldCount - 1){
-					items = items + ",";
-				}
-				rows = v8::String::Concat(rows, Helpers::String::ToV8String(items));
-				fc++;
+	Handle<v8::String> rows = v8::String::New("[");
+	//loop through the rows
+	while(reader->Read()){
+		//loop through the columns
+		rows = v8::String::Concat(rows, v8::String::New("{"));
+		while(fc < reader->FieldCount){
+			items = "\"" + Helpers::String::Replace(reader->GetName(fc),".","_") + "\":\"" + reader[fc] + "\"";
+			if(fc != reader->FieldCount - 1){
+				items = items + ",";
 			}
-			fc = 0;
-			rows = v8::String::Concat(rows, v8::String::New("},"));
-			rc++;	
+			rows = v8::String::Concat(rows, Helpers::String::ToV8String(items));
+			fc++;
 		}
-		//remove the comma fronm the last JSON item
-		rows = Helpers::String::SnipEnd(rows); 
-		rows = v8::String::Concat(rows, v8::String::New("],"));
-	}while (reader->NextResult())
-	rows = Helpers::String::SnipEnd(rows);
-	rowset = v8::String::Concat(rowset, rows);
-	rowset = v8::String::Concat(rowset, v8::String:New("]"));
-	return scope.Close(Helpers::Json::ParseJson(rowset));
+		fc = 0;
+		rows = v8::String::Concat(rows, v8::String::New("},"));
+		rc++;	
+	}
+	//remove the comma fronm the last JSON item
+	rows = Helpers::String::SnipEnd(rows); 
+	rows = v8::String::Concat(rows, v8::String::New("],"));
+	return scope.Close(rows);	
 }
 
 //Builds and returns a javascript object rather than parsing to json
