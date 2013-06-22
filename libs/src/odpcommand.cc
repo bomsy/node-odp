@@ -230,8 +230,10 @@ Handle<v8::String> OdpCommand::LoopReader(Oracle::DataAccess::Client::OracleData
 		rows = v8::String::Concat(rows, v8::String::New("},"));
 		rc++;	
 	}
-	//remove the comma fronm the last JSON item
-	rows = Helpers::String::SnipEnd(rows); 
+	if(Helpers::String::ToStdString(rows).length() > 1){
+		//remove the comma from the last JSON item
+		rows = Helpers::String::SnipEnd(rows); 
+	}
 	rows = v8::String::Concat(rows, v8::String::New("],"));
 	return scope.Close(rows);	
 }
