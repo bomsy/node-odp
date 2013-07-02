@@ -40,6 +40,7 @@ namespace Helpers
 	class Json {
 		public:
 			static Local<v8::Value> ParseJson(Handle<Value> jsonString);
+			static Local<v8::Value> UnfixJson(Handle<Value> jsonString);
 		private:
 			Json();
 	};

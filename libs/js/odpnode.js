@@ -96,3 +96,55 @@ var regServerCommand = new odpnode.OracleCommand('BEGIN BMD.SERVER_API.setServer
 			console.log(parameters);
 		}
 	});
+
+console.log("---- Control Characters ------");
+var cCommand = new odpnode.OracleCommand("select 'This is a ' || chr(13) || 'two-line string' from dual", commandType.TEXT, con)
+	cCommand.executeScalar(function(err, value){
+		if(err){
+			console.log(err);
+		}else{
+			console.log(value);
+		}
+	});
+
+console.log("---- Count ------");
+var cCmd = new odpnode.OracleCommand("select count(*) from dual", commandType.TEXT, con)
+	cCmd.executeReader(function(err, rows){
+		if(err){
+			console.log(err);
+		}else{
+			console.log(rows[0]["COUNT(*)"]);
+		}
+	});
+
+console.log("--- REF Cursors-----");
+
+var refParams = [
+	{
+		name: 'pJOBCODE',
+		type: datatypes.VARCHAR2,
+		value: "2378",
+		direction: parameterDirection.INPUT,
+		size: 2000
+	},{
+		name: 'pFilterDescription',
+		type: datatypes.VARCHAR2,
+		value: "",
+		size: 2000,
+		direction: parameterDirection.OUTPUT
+	},{
+		name: 'resultset',
+		type: datatypes.REFCURSOR,
+		size: 2000,
+		value: "",
+		direction: parameterDirection.OUTPUT
+	}
+];
+var refCmd = new odpnode.OracleCommand("MID.MICHUNK_API.GetChunksByJob_cursor", commandType.STOREDPROCEDURE, refParams, con);
+	refCmd.executeReader(function(err, rowset){
+		if(err){
+			console.log(err);
+		}else{
+			console.log(rowset);
+		}
+	});

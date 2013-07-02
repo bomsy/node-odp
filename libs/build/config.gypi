@@ -5,8 +5,7 @@
     "default_configuration": "Release",
     "defines": [],
     "include_dirs": [],
-    "libraries": [],
-    "msbuild_toolset": "v110"
+    "libraries": []
   },
   "variables": {
     "clang": 0,
@@ -32,8 +31,7 @@
     "v8_no_strict_aliasing": 1,
     "v8_use_snapshot": "false",
     "visibility": "",
-    "nodedir": "C:\\Users\\Steve\\.node-gyp\\0.10.10",
-    "copy_dev_lib": "true",
-    "standalone_static_library": 1
+    "nodedir": "C:\\Users\\hubert.manilla\\.node-gyp\\0.10.0",
+    "copy_dev_lib": "true"
   }
 }
