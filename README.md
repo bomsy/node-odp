@@ -43,7 +43,7 @@ A node library that wraps the Oracle Data Provider for.NET (ODP.NET) library to 
 	    }	
     ]
 
-    //Simple select statement
+    //SIMPLE SELECT STATEMENT
     var cmdSelStatement = new odpnode.OracleCommand("SELECT m.FOLDERID,m.ZONE.ZONECODE FROM MID.MIFOLDER2 m,MID.MIVERSION s WHERE m.VERSION.VERSIONID = s.VERSIONID AND  m.ZONE.ZONECODE ='chwhrf-bldg'", cmdType.TEXT, con);
     cmdSelStatement.executeReader(function(err, rows){
 	    if(err){
@@ -54,7 +54,7 @@ A node library that wraps the Oracle Data Provider for.NET (ODP.NET) library to 
 	    }	
     });
 
-    //Oracle function with parameters
+    //ORACLE FUNCTION WITH PARAMETERS
     var cmdProc = new odpnode.OracleCommand("BEGIN :vResult := MID.MI_MAXSCRIPT.MITest( :pFOLDERID ); END;", cmdType.TEXT, parameters, con);
     cmdProc.executeNonQuery(function(err, rowsAffected, params){
 	    if(err){
@@ -64,6 +64,37 @@ A node library that wraps the Oracle Data Provider for.NET (ODP.NET) library to 
 	    }	
     });
 
+    var refParams = [
+        {
+            name: 'pJOBCODE',
+            type: datatypes.VARCHAR2,
+            value: "2378",
+            direction: parameterDirection.INPUT,
+            size: 2000
+        },{
+            name: 'pFilterDescription',
+            type: datatypes.VARCHAR2,
+            value: "",
+            size: 2000,
+            direction: parameterDirection.OUTPUT
+        },{
+            name: 'resultset',
+            type: datatypes.REFCURSOR,
+            size: 2000,
+            value: "",
+            direction: parameterDirection.OUTPUT
+        }
+    ];
+    
+    //RETURNING REFCURSORS
+    var refCmd = new odpnode.OracleCommand("MID.MICHUNK_API.GetChunksByJob_cursor", commandType.STOREDPROCEDURE, refParams, con);
+    refCmd.executeReader(function(err, rowset){
+        if(err){
+            console.log(err);
+        }else{
+            console.log(rowset);
+        }
+    });
 
 ## API Definition
 

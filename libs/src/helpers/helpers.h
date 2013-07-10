@@ -33,14 +33,19 @@ namespace Helpers
 			static std::string Replace(std::string main, std::string find, std::string replace);
 			static System::String^ Replace(System::String^ main, std::string find, std::string replace);
 			static Handle<v8::String> Replace(Handle<v8::String> main, std::string find, std::string replace);
+
+			static System::String^  JsonEscape(System::String^  s);
+
 		private:
 			String();
 			~String();
 	};
 	class Json {
 		public:
-			static Local<v8::Value> ParseJson(Handle<Value> jsonString);
-			static Local<v8::Value> UnfixJson(Handle<Value> jsonString);
+			static Local<v8::Value> ParseJson(Handle<v8::Value> jsonString);
+			static Local<v8::Value> UnfixJson(Handle<v8::Value> jsonString);
+			
+
 		private:
 			Json();
 	};

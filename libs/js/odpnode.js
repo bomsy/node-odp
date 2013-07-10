@@ -148,3 +148,12 @@ var refCmd = new odpnode.OracleCommand("MID.MICHUNK_API.GetChunksByJob_cursor", 
 			console.log(rowset);
 		}
 	});
+console.log("------------basic select-------------");
+var csel = new odpnode.OracleCommand("select 'This is a' || chr(10) || 'two-line string' from dual", commandType.TEXT, con);
+csel.executeReader(function(err, rows){
+	if(err){
+		console.log(err);
+	}else{
+		console.log(rows);
+	}
+});

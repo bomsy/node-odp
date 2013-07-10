@@ -10,22 +10,25 @@
 #using <System.dll>
 #using <System.Data.dll>
 #using <Oracle.DataAccess.dll>
+#using <mscorlib.dll>
 
 using namespace std;
 using namespace v8;
 using namespace Helpers;
 using namespace System;
 using namespace System::Data;
+using namespace System::Text;
 using namespace Oracle::DataAccess::Client;
 using namespace Oracle::DataAccess::Types;
 
 OdpCommand::OdpCommand(){}; //constructor
 OdpCommand::~OdpCommand(){}; //destructor
-	//Command Types (System::Data::CommandType)
-	const int CMDTYPETEXT 	= 1;
-	const int CMDTYPESTDPROC 	= 4;
-	bool refcur = false;
-	const int REFCURNO = 121;
+
+//Command Types (System::Data::CommandType)
+const int CMDTYPETEXT 	= 1;
+const int CMDTYPESTDPROC 	= 4;
+bool refcur = false;
+const int REFCURNO = 121;
 
 void OdpCommand::Init(Handle<v8::Object> target){
 	Local<FunctionTemplate> tpl = FunctionTemplate::New(New);
@@ -208,18 +211,25 @@ Handle<v8::Value> OdpCommand::ToJSON(Oracle::DataAccess::Client::OracleDataReade
 	return scope.Close(Helpers::Json::ParseJson(rowset));
 }
 
+/*Handle<v8::String> OdpCommand::Escape(Handle<v8::String> s){
+	HandleScope scope;
+	Handle<v8::Array> sa = 
+}*/
+
 Handle<v8::String> OdpCommand::LoopReader(Oracle::DataAccess::Client::OracleDataReader^ reader){	
 	HandleScope scope;
 	int fc = 0; //fields count
 	int rc = 0; //records count
 	System::String^ items;
+
 	Handle<v8::String> rows = v8::String::New("[");
 	//loop through the rows
 	while(reader->Read()){
 		//loop through the columns
 		rows = v8::String::Concat(rows, v8::String::New("{"));
 		while(fc < reader->FieldCount){
-			items = "\"" + Helpers::String::Replace(reader->GetName(fc),".","_") + "\":\"" + reader[fc] + "\"";
+			items = "\"" + Helpers::String::JsonEscape(reader->GetName(fc)) + "\":\"" + Helpers::String::JsonEscape(reader[fc]->ToString()) + "\"";
+			//Console::WriteLine(Helpers::String::JsonEscape(reader[fc]->ToString()));
 			if(fc != reader->FieldCount - 1){
 				items = items + ",";
 			}
@@ -328,7 +338,7 @@ Handle<Value> OdpCommand::ExecuteScalar(const Arguments& args){
 		error = Helpers::String::ToV8String(e->Message);
 	} 
 	
-	Local<Value> argv[argc] = { Local<Value>::New(error), Local<Value>::New(Helpers::String::ToV8String(rows)) };
+	Local<Value> argv[argc] = { Local<Value>::New(error), Local<Value>::New(Helpers::String::ToV8String(Helpers::String::JsonEscape(rows))) };
 	callback->Call(Context::GetCurrent()->Global(), argc, argv);
 	//Close the connection
 	//c->command->Connection->Close();

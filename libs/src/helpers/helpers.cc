@@ -70,7 +70,7 @@ Handle<v8::String> Helpers::String::ToV8String(int i){
 	return ToV8String(iout);
 }
 
-std::string Helpers::String::Replace(std::string main,std::string find , std::string replace){
+std::string Helpers::String::Replace(std::string main, std::string find , std::string replace){
 	unsigned found;
 	found = main.find(find);
 	while(found < main.length()){
@@ -98,10 +98,51 @@ Handle<v8::String> Helpers::String::SnipEnd(Handle<v8::String> s){
 
 Handle<v8::String> Helpers::String::SnipStart(Handle<v8::String> s){
 	std::string cs = ToStdString(s);
-	char* c = (char*)cs.c_str(); //converts to a const character pointer then typecast to cha r pointer
+	char* c = (char*)cs.c_str(); //converts to a const character pointer then typecast to char pointer
 	c++;
 	std::string os(c);
 	return ToV8String(os);
+}
+
+System::String^ Helpers::String::JsonEscape(System::String^ s){
+	System::String^ ns = "";
+	for each (Char ch in s){
+		switch(ch){
+			case '\n': // line feed - newline character
+				ns += "\\n";
+				break;
+			case '\r': //carriage return
+				ns += "\\r";
+				break;
+			case '\"': //double quotes
+				ns += '\\"';
+				break;
+			case '/': //forward slash
+				ns += "/";
+				break;
+			case '\b': //backspace
+				ns += "\\b";
+				break;
+			case '\f': //form feed
+				ns += "\\f";
+				break;
+			case '\t': //tab
+				ns += "\\t";
+				break;
+			case '\v': //vertical tab
+				ns += "\\v";
+				break;
+			case '*':
+				ns += "_";
+				break;
+			case '\?':
+				ns += "\\?";
+				break;
+			default:
+				ns += ch;
+		}
+	}
+	return ns;
 }
 
 Local<v8::Value> Helpers::Json::ParseJson(Handle<v8::Value> jsonString){
