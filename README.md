@@ -1,5 +1,7 @@
 # NODE-ODP
 
+[![NPM](https://nodei.co/npm/node-odp.png?downloads=true)](https://npmjs.org/package/node-odp)
+
 A node library that wraps the Oracle Data Provider for.NET (ODP.NET) library to provide bindings to oracle on windows.
 
 ## Requirements
